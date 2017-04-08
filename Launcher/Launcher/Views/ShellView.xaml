@@ -6,8 +6,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     mc:Ignorable="d"
+    TitlebarHeight="35"
+    WindowStartupLocation="CenterScreen"
+    WindowTitleBrush="{DynamicResource TitleBarBrush}"
+    GlowBrush="Black"
+    BorderThickness="0"
     Width="1000"
-    Height="550"
-    WindowStartupLocation="CenterScreen">
+    Height="550">
     <Grid />
 </controls:MetroWindow>

@@ -1,0 +1,25 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color
+        x:Key="TitleBarColor">
+        #34323F
+    </Color>
+    <Color
+        x:Key="TitleBarSelectedColor">
+        #41414b
+    </Color>
+    <Color
+        x:Key="TitleBarHoverColor">
+        #4d4d57
+    </Color>
+    <SolidColorBrush
+        x:Key="TitleBarBrush"
+        Color="{StaticResource TitleBarColor}" />
+    <SolidColorBrush
+        x:Key="TitleBarHoverBrush"
+        Color="{StaticResource TitleBarHoverColor}" />
+    <SolidColorBrush
+        x:Key="TitleBarSelectedBrush"
+        Color="{StaticResource TitleBarSelectedColor}" />
+</ResourceDictionary>
