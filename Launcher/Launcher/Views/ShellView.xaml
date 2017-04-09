@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     mc:Ignorable="d"
-    TitlebarHeight="35"
+    TitlebarHeight="34"
     WindowStartupLocation="CenterScreen"
     WindowTitleBrush="{DynamicResource TitleBarBrush}"
     GlowBrush="Black"
