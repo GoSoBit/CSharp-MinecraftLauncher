@@ -13,5 +13,6 @@ namespace Launcher.Contracts
 
         Task<LoginDialogData> ShowLoginAsync();
         void CloseWindow();
+        Task<ProgressDialogController> ShowProgressAsync(string title, string message, bool isCancelable = false);
     }
 }

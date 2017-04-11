@@ -57,5 +57,17 @@ namespace Launcher.Services
         {
             window.Close();
         }
+
+        /// <summary>
+        /// Shows a progress dialog inside the current window.
+        /// </summary>
+        /// <param name="title">The dialog title</param>
+        /// <param name="message">The message</param>
+        /// <param name="isCancelable">Indicates if can cancel</param>
+        /// <returns>The dialog controller</returns>
+        public async Task<ProgressDialogController> ShowProgressAsync(string title, string message, bool isCancelable = false)
+        {
+            return await window.ShowProgressAsync(title, message, isCancelable);
+        }
     }
 }
