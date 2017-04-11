@@ -1,0 +1,163 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks">
+    <ControlTemplate
+        x:Key="DockPanelTabItemTemplate"
+        TargetType="TabItem">
+        <Border
+            x:Name="Border"
+            Background="{DynamicResource TitleBarBrush}"
+            SnapsToDevicePixels="true"
+            MinWidth="{TemplateBinding MinWidth}"
+            Height="60">
+            <!--Here goes the content of a tab item-->
+            <Grid
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        x:Name="PART_IconColumn"
+                        Width="Auto" />
+                    <ColumnDefinition
+                        x:Name="PART_Separator"
+                        Width="8" />
+                    <ColumnDefinition
+                        x:Name="PART_HeaderColumn"
+                        Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <!--The icon on the left-->
+                <iconPacks:PackIconMaterial
+                    Grid.Column="0"
+                    Kind="{Binding DisplayIcon}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Foreground="White" />
+                <!--The text on the right-->
+                <TextBlock
+                    x:Name="ContentSite"
+                    Grid.Column="2"
+                    Foreground="{DynamicResource WhiteBrush}"
+                    Style="{DynamicResource BodyTextBlockStyle}"
+                    Text="{Binding DisplayName}"
+                    SnapsToDevicePixels="True" />
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <!--If the display name is empty, move the tab to the right and shorten it's width-->
+            <DataTrigger
+                Binding="{Binding IsShortTab}"
+                Value="True">
+                <Setter
+                    Property="ToolTip"
+                    Value="{Binding DisplayName}" />
+                <Setter
+                    Property="Text"
+                    TargetName="ContentSite"
+                    Value="" />
+                <Setter
+                    Property="Width"
+                    Value="0"
+                    TargetName="PART_Separator" />
+                <Setter
+                    Property="DockPanel.Dock"
+                    Value="Right" />
+                <Setter
+                    Property="MinWidth"
+                    Value="40" />
+            </DataTrigger>
+            <!--Mouse interactions-->
+            <Trigger
+                SourceName="Border"
+                Property="IsMouseOver"
+                Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Duration="0:0:0.200"
+                                Storyboard.TargetName="Border"
+                                Storyboard.TargetProperty="Background.Color"
+                                From="{StaticResource TitleBarColor}"
+                                To="{StaticResource TitleBarHoverColor}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Duration="0:0:0.200"
+                                Storyboard.TargetName="Border"
+                                Storyboard.TargetProperty="Background.Color"
+                                From="{StaticResource TitleBarHoverColor}"
+                                To="{StaticResource TitleBarColor}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+                <Setter
+                    TargetName="Border"
+                    Property="Background"
+                    Value="{DynamicResource TitleBarHoverBrush}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition
+                        Property="IsSelected"
+                        Value="True" />
+                    <Condition
+                        Property="IsMouseOver"
+                        Value="True" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Duration="0:0:0.200"
+                                Storyboard.TargetName="Border"
+                                Storyboard.TargetProperty="Background.Color"
+                                From="{StaticResource TitleBarSelectedColor}"
+                                To="{StaticResource TitleBarHoverColor}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.EnterActions>
+                <MultiTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Duration="0:0:0.200"
+                                Storyboard.TargetName="Border"
+                                Storyboard.TargetProperty="Background.Color"
+                                From="{StaticResource TitleBarHoverColor}"
+                                To="{StaticResource TitleBarSelectedColor}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.ExitActions>
+            </MultiTrigger>
+            <Trigger
+                Property="IsSelected"
+                Value="True">
+                <Setter
+                    TargetName="Border"
+                    Property="Background"
+                    Value="{DynamicResource TitleBarSelectedBrush}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style
+        x:Key="DockPanelTabItemContainerStyle"
+        TargetType="TabItem">
+        <!--Else set default properties - full width-->
+        <Setter
+            Property="DockPanel.Dock"
+            Value="Left" />
+        <Setter
+            Property="MinWidth"
+            Value="150" />
+        <!--For both, set the template from above-->
+        <Setter
+            Property="Template"
+            Value="{StaticResource DockPanelTabItemTemplate}" />
+    </Style>
+</ResourceDictionary>

@@ -20,6 +20,10 @@
                 <!-- Custom additional styles -->
                 <ResourceDictionary
                     Source="Styles/Colors.xaml" />
+                <ResourceDictionary
+                    Source="Styles/TabControl.xaml" />
+                <ResourceDictionary
+                    Source="Styles/TabItem.xaml" />
                 <!-- The bootstrapper -->
                 <ResourceDictionary>
                     <projectRoot:Bootstrapper
