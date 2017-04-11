@@ -11,6 +11,7 @@ namespace Launcher.Models
     public abstract class TabBase : Screen, ITab
     {
         public PackIconMaterialKind DisplayIcon { get; protected set; }
+        public bool IsShortTab { get; protected set; }
         public int? DisplayOrder { get; protected set; }
         public bool IsHomeTab { get; protected set; }
     }
