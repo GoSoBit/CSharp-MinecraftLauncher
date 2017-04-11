@@ -83,6 +83,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\TabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TabItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ShellView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -95,8 +103,11 @@
     <Compile Include="Contracts\IMetroWindowManager.cs" />
     <Compile Include="Contracts\IShell.cs" />
     <Compile Include="Contracts\ITab.cs" />
+    <Compile Include="Extensions\NotifyPropertyChangedExExtensions.cs" />
     <Compile Include="Models\TabBase.cs" />
     <Compile Include="Services\MetroWindowManager.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
