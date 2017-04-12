@@ -9,8 +9,7 @@ namespace Launcher.ViewModels
         {
             DisplayName = "Settings";
             DisplayIcon = PackIconMaterialKind.Settings;
-            DisplayOrder = 1;
-            IsShortTab = true;
+            DisplayOrder = 3;
         }
     }
 }
