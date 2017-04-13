@@ -26,12 +26,24 @@ namespace Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string RefreshToken {
+        public string AccessToken {
             get {
-                return ((string)(this["RefreshToken"]));
+                return ((string)(this["AccessToken"]));
             }
             set {
-                this["RefreshToken"] = value;
+                this["AccessToken"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ClientToken {
+            get {
+                return ((string)(this["ClientToken"]));
+            }
+            set {
+                this["ClientToken"] = value;
             }
         }
     }
