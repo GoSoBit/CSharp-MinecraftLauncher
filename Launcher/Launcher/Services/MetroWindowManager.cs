@@ -43,8 +43,9 @@ namespace Launcher.Services
         /// <returns>The async task with login result</returns>
         public async Task<LoginDialogData> ShowLoginAsync()
         {
-            return await window.ShowLoginAsync("Zaloguj się", "Podaj swoje dane do logowania", new LoginDialogSettings
+            return await window.ShowLoginAsync("Log on", "Please specify your login data", new LoginDialogSettings
             {
+                UsernameWatermark = "Email",
                 NegativeButtonText = "Cancel",
                 NegativeButtonVisibility = Visibility.Visible
             });
