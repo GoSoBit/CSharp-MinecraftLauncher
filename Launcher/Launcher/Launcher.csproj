@@ -56,6 +56,12 @@
     <Reference Include="MahApps.Metro.IconPacks, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.1.8.0\lib\net46\MahApps.Metro.IconPacks.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -119,12 +125,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Contracts\IAccountService.cs" />
     <Compile Include="Contracts\IMetroWindowManager.cs" />
+    <Compile Include="Contracts\IPayload.cs" />
     <Compile Include="Contracts\IShell.cs" />
     <Compile Include="Contracts\ITab.cs" />
     <Compile Include="Extensions\NotifyPropertyChangedExExtensions.cs" />
+    <Compile Include="Models\AuthenticationPayload.cs" />
+    <Compile Include="Models\CamelCaseJsonSerializerStrategy.cs" />
+    <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\TabBase.cs" />
+    <Compile Include="Models\TokenPayload.cs" />
     <Compile Include="Services\MetroWindowManager.cs" />
+    <Compile Include="Services\MojangAccountService.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LogoutViewModel.cs" />
     <Compile Include="ViewModels\PacksViewModel.cs" />
