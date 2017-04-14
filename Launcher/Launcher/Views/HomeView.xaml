@@ -38,20 +38,16 @@
                     <DataTemplate>
                         <controls:Tile
                             caliburn:Message.Attach="[Event Click] = [Action ShowNews($dataContext)]"
+                            Margin="0,3"
                             Style="{StaticResource AnimatedOnMouseOverTileStyle}"
                             Width="Auto"
-                            Height="Auto"
-                            HorizontalTitleAlignment="Stretch"
-                            VerticalTitleAlignment="Stretch"
-                            HorizontalContentAlignment="Stretch"
-                            VerticalContentAlignment="Center">
+                            Height="40"
+                            HorizontalContentAlignment="Stretch">
                             <TextBlock
                                 Text="{Binding Title}"
                                 Style="{StaticResource SubtitleTextBlockStyle}"
-                                Height="40"
                                 TextTrimming="CharacterEllipsis"
                                 VerticalAlignment="Center"
-                                HorizontalAlignment="Left"
                                 Margin="4,0,0,0" />
                         </controls:Tile>
                     </DataTemplate>
