@@ -1,0 +1,54 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
+    <Style
+        x:Key="AnimatedOnMouseOverTileStyle"
+        TargetType="controls:Tile">
+        <Style.Triggers>
+            <Trigger
+                Property="IsMouseOver"
+                Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Background.Opacity"
+                                Duration="0:0:0.200"
+                                From="1"
+                                To="0.8" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Background.Opacity"
+                                Duration="0:0:0.200"
+                                From="0.8"
+                                To="1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
+        x:Key="SubjectAverageTileStyle"
+        TargetType="controls:Tile">
+        <Setter
+            Property="Background"
+            Value="{DynamicResource TitleBarSelectedBrush}" />
+        <Style.Triggers>
+            <DataTrigger
+                Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}"
+                Value="True">
+                <Setter
+                    Property="Background"
+                    Value="{DynamicResource AccentColorBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

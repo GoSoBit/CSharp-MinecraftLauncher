@@ -14,7 +14,7 @@
                 <ResourceDictionary
                     Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
                 <ResourceDictionary
-                    Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                    Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml" />
                 <ResourceDictionary
                     Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <!-- Custom additional styles -->
@@ -24,6 +24,10 @@
                     Source="Styles/TabControl.xaml" />
                 <ResourceDictionary
                     Source="Styles/TabItem.xaml" />
+                <ResourceDictionary
+                    Source="Styles/TextBlock.xaml" />
+                <ResourceDictionary
+                    Source="Styles/Tile.xaml" />
                 <!-- The bootstrapper -->
                 <ResourceDictionary>
                     <projectRoot:Bootstrapper
