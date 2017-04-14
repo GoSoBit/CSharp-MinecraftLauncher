@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using Launcher.Contracts;
@@ -14,8 +13,8 @@ namespace Launcher.ViewModels
 {
     public sealed class ShellViewModel : Conductor<ITab>, IShell
     {
-        private readonly IMetroWindowManager windowManager;
         private readonly IAccountService accountService;
+        private readonly IMetroWindowManager windowManager;
         private IEnumerable<ITab> tabs;
 
         public ShellViewModel(IMetroWindowManager windowManager, IAccountService accountService, IEnumerable<ITab> tabs)
@@ -47,18 +46,23 @@ namespace Launcher.ViewModels
             ExecuteActionIfTabIsPresent(selectionArgs.RemovedItems, DeactivateItem);
         }
 
+        /// <summary>
+        /// Called when an attached view's Loaded event fires.
+        /// Application tries to log on if an access token is saved. Otherwise asks for the login data.
+        /// </summary>
         protected override async void OnViewLoaded(object view)
         {
+            base.OnViewLoaded(view);
             bool success;
 
             if (string.IsNullOrEmpty(Settings.Default.AccessToken))
             {
                 LoginDialogData credentials = await windowManager.ShowLoginAsync();
-                success = accountService.Authenticate(credentials.Username, credentials.Password);
+                success = await accountService.AuthenticateAsync(credentials.Username, credentials.Password);
             }
             else
             {
-                success = accountService.Authenticate(Settings.Default.AccessToken);
+                success = await accountService.AuthenticateAsync(Settings.Default.AccessToken);
             }
 
             if (!success)
