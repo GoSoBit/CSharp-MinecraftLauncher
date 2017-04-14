@@ -33,7 +33,7 @@ namespace Launcher.Services
             return Authenticate("/refresh", new TokenPayload(accessToken, clientToken));
         }
 
-        private bool Authenticate(string endpoint, object payload)
+        private bool Authenticate(string endpoint, IPayload payload)
         {
             try
             {
