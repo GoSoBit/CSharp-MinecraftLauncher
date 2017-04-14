@@ -1,16 +1,62 @@
-﻿using Launcher.Models;
+﻿using System.Collections.Generic;
+using Launcher.Contracts;
+using Launcher.Extensions;
+using Launcher.Models;
+using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.IconPacks;
 
 namespace Launcher.ViewModels
 {
     public sealed class HomeViewModel : TabBase
     {
-        public HomeViewModel()
+        private readonly IAccountService accountService;
+        private readonly INewsService newsService;
+        private readonly IMetroWindowManager windowManager;
+        private string email;
+        private IEnumerable<News> news;
+        private string username;
+
+        public HomeViewModel(IAccountService accountService, INewsService newsService, IMetroWindowManager windowManager)
         {
+            this.accountService = accountService;
+            this.newsService = newsService;
+            this.windowManager = windowManager;
             DisplayName = "Home";
             DisplayIcon = PackIconMaterialKind.HomeOutline;
             DisplayOrder = 1;
             IsHomeTab = true;
+        }
+
+        public string Email
+        {
+            get => email;
+            set => this.Set(out email, value);
+        }
+
+        public string Username
+        {
+            get => username;
+            set => this.Set(out username, value);
+        }
+
+        public IEnumerable<News> News
+        {
+            get => news;
+            set => this.Set(out news, value);
+        }
+
+        public async void ShowNews(News news)
+        {
+            await windowManager.ShowMessageAsync(news.Title, news.Content);
+        }
+
+        protected override async void OnInitialize()
+        {
+            ProgressDialogController progress = await windowManager.ShowProgressAsync("Please wait", "Loading 'Home' data");
+            progress.SetIndeterminate();
+            Email = (await accountService.GetUserInfoAsync()).Email;
+            News = await newsService.GetNews();
+            await progress.CloseAsync();
         }
     }
 }
