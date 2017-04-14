@@ -52,7 +52,6 @@ namespace Launcher.ViewModels
         /// </summary>
         protected override async void OnViewLoaded(object view)
         {
-            base.OnViewLoaded(view);
             bool success;
 
             if (string.IsNullOrEmpty(Settings.Default.AccessToken))
