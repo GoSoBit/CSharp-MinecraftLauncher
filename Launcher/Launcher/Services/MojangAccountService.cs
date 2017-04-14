@@ -11,16 +11,20 @@ namespace Launcher.Services
 {
     public class MojangAccountService : IAccountService
     {
-        private const string ApiUrl = "https://authserver.mojang.com";
+        private const string AuthServerUrl = "https://authserver.mojang.com";
+        private const string ApiServerUrl = "https://api.mojang.com";
 
-        private readonly IRestClient client;
+        private readonly IRestClient authClient;
+        private readonly IRestClient apiClient;
         private readonly string clientToken = Settings.Default.ClientToken;
         private string accessToken;
 
-        public MojangAccountService(IRestClient client)
+        public MojangAccountService(IRestClient authClient, IRestClient apiClient)
         {
-            this.client = client;
-            client.BaseUrl = new Uri(ApiUrl);
+            this.authClient = authClient;
+            this.apiClient = apiClient;
+            authClient.BaseUrl = new Uri(AuthServerUrl);
+            apiClient.BaseUrl = new Uri(ApiServerUrl);
         }
 
         public bool Authenticate(string email, string password)
@@ -33,13 +37,22 @@ namespace Launcher.Services
             return Authenticate("/refresh", new TokenPayload(accessToken, clientToken));
         }
 
+        public UserInfo GetUserInfo()
+        {
+            var request = new RestRequest("/user", Method.GET);
+            request.AddHeader("Authorization", "Bearer " + accessToken);
+            var result = apiClient.Execute<UserInfo>(request);
+
+            return result.Data;
+        }
+
         private bool Authenticate(string endpoint, IPayload payload)
         {
             try
             {
                 var request = new RestRequest(endpoint, Method.POST);
                 request.AddJsonBody(payload);
-                var result = client.Execute<TokenPayload>(request);
+                var result = authClient.Execute<TokenPayload>(request);
 
                 accessToken = result.Data.AccessToken;
                 Settings.Default.AccessToken = accessToken;
