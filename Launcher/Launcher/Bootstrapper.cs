@@ -59,6 +59,7 @@ namespace Launcher
 
             //Register others
             builder.RegisterType<RestClient>().As<IRestClient>();
+            builder.Register(x => new TokenPayload(Settings.Default.AccessToken, Settings.Default.ClientToken)).AsSelf();
 
             container = builder.Build();
         }
