@@ -16,51 +16,54 @@ namespace Launcher.Tests
         private readonly IFixture fixture = new Fixture();
         private readonly AuthenticationPayload validAuthPayload;
         private readonly TokenPayload validTokenPayload;
+        private readonly TokenPayload invalidTokenPayload;
 
         public MojangAccountServiceTests()
         {
-            validTokenPayload = new TokenPayload(fixture.Create<string>(), string.Empty);
-            validAuthPayload = new AuthenticationPayload(fixture.Create<string>(), fixture.Create<string>(), string.Empty);
+            validTokenPayload = fixture.Create<TokenPayload>();
+            invalidTokenPayload = fixture.Create<TokenPayload>();
+            validAuthPayload = new AuthenticationPayload(fixture.Create<string>(), fixture.Create<string>(), validTokenPayload.ClientToken);
         }
 
         [TestMethod]
         public async Task ShouldAuthenticateOrRefuseUsingCredentials()
         {
             var restClientMock = SetupAuthRestClientMock(validAuthPayload);
-            var service = new MojangAccountService(restClientMock.Object, restClientMock.Object);
+            var service = new MojangAccountService(validTokenPayload, restClientMock.Object, restClientMock.Object);
 
-            bool resultValid = await service.AuthenticateAsync(validAuthPayload.Username, validAuthPayload.Password);
-            bool resultInvalid1 = await service.AuthenticateAsync(null, null);
-            bool resultInvalid2 = await service.AuthenticateAsync(fixture.Create<string>(), fixture.Create<string>());
+            bool validResult = await service.AuthenticateAsync(validAuthPayload.Username, validAuthPayload.Password);
+            bool invalidResult1 = await service.AuthenticateAsync(null, null);
+            bool invalidResult2 = await service.AuthenticateAsync(fixture.Create<string>(), fixture.Create<string>());
 
-            Assert.IsTrue(resultValid);
-            Assert.IsFalse(resultInvalid1);
-            Assert.IsFalse(resultInvalid2);
+            Assert.IsTrue(validResult);
+            Assert.IsFalse(invalidResult1);
+            Assert.IsFalse(invalidResult2);
         }
 
         [TestMethod]
         public async Task ShouldAuthenticateOrRefuseUsingRefreshing()
         {
             var restClientMock = SetupAuthRestClientMock(validTokenPayload);
-            var service = new MojangAccountService(restClientMock.Object, restClientMock.Object);
+            var validService = new MojangAccountService(validTokenPayload, restClientMock.Object, restClientMock.Object);
+            var invalidService = new MojangAccountService(invalidTokenPayload, restClientMock.Object, restClientMock.Object);
 
-            bool resultValid = await service.AuthenticateAsync(validTokenPayload.AccessToken);
-            bool resultInvalid1 = await service.AuthenticateAsync(null);
-            bool resultInvalid2 = await service.AuthenticateAsync(fixture.Create<string>());
+            bool validResult1 = await validService.RefreshAuthenticationAsync();
+            bool validResult2 = await validService.RefreshAuthenticationAsync();
+            bool invalidResult = await invalidService.RefreshAuthenticationAsync();
 
-            Assert.IsTrue(resultValid);
-            Assert.IsFalse(resultInvalid1);
-            Assert.IsFalse(resultInvalid2);
+            Assert.IsTrue(validResult1);
+            Assert.IsTrue(validResult2);
+            Assert.IsFalse(invalidResult);
         }
 
         [TestMethod]
         public async Task ShouldLogOff()
         {
             var restClientMock = new Mock<IRestClient>();
-            restClientMock.Setup(x => x.ExecuteTaskAsync(It.IsAny<IRestRequest>())).ReturnsAsync(new RestResponse { StatusCode = HttpStatusCode.NoContent});
+            restClientMock.Setup(x => x.ExecuteTaskAsync(It.IsAny<IRestRequest>())).ReturnsAsync(new RestResponse { StatusCode = HttpStatusCode.NoContent });
 
-            var service = new MojangAccountService(restClientMock.Object, restClientMock.Object);
-            var result = await service.LogOff();
+            var service = new MojangAccountService(validTokenPayload, restClientMock.Object, restClientMock.Object);
+            var result = await service.LogOffAsync();
 
             Assert.IsTrue(result);
         }
@@ -74,9 +77,9 @@ namespace Launcher.Tests
                 Setup(x => x.ExecuteTaskAsync<UserInfo>(It.IsAny<IRestRequest>()))
                 .ReturnsAsync(new RestResponse<UserInfo> { Data = validUserInfo });
 
-            var service = new MojangAccountService(restClientMock.Object, restClientMock.Object);
+            var service = new MojangAccountService(validTokenPayload, restClientMock.Object, restClientMock.Object);
             var result = await service.GetUserInfoAsync();
-            
+
             Assert.AreEqual(validUserInfo, result);
         }
 
