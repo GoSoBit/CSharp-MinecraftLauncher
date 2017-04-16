@@ -15,11 +15,33 @@
     Width="1000"
     Height="550">
     <Grid>
+        <Image
+            Margin="-20,20,-20,-20"
+            Source="pack://siteoforigin:,,,/Resources/bg.png"
+            Stretch="Fill">
+            <Image.OpacityMask>
+                <LinearGradientBrush
+                    EndPoint="0.5,1"
+                    StartPoint="0.5,0">
+                    <GradientStop />
+                    <GradientStop
+                        Color="Black"
+                        Offset="0.857" />
+                    <GradientStop
+                        Color="#30284799" />
+                </LinearGradientBrush>
+            </Image.OpacityMask>
+            <Image.Effect>
+                <BlurEffect
+                    Radius="20" />
+            </Image.Effect>
+        </Image>
         <TabControl
             x:Name="Tabs"
             cal:Message.Attach="[Event SelectionChanged] = [Action OnTabSwitched($executionContext)]"
             Template="{StaticResource DockPanelTabControlTemplate}"
             ItemContainerStyle="{StaticResource DockPanelTabItemContainerStyle}"
-            controls:TabControlHelper.Transition="Left" />
+            controls:TabControlHelper.Transition="Left"
+            Background="{x:Null}" />
     </Grid>
 </controls:MetroWindow>

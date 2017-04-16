@@ -64,6 +64,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -134,6 +135,7 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Contracts\IAccountService.cs" />
+    <Compile Include="Contracts\IWebService.cs" />
     <Compile Include="Contracts\IMetroWindowManager.cs" />
     <Compile Include="Contracts\INewsService.cs" />
     <Compile Include="Contracts\IPayload.cs" />
@@ -150,6 +152,9 @@
     <Compile Include="Services\MetroWindowManager.cs" />
     <Compile Include="Services\MojangAccountService.cs" />
     <Compile Include="Services\NewsService.cs" />
+    <Compile Include="Services\WebService.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LogoutViewModel.cs" />
     <Compile Include="ViewModels\PacksViewModel.cs" />
@@ -187,7 +192,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config">
@@ -200,6 +205,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
