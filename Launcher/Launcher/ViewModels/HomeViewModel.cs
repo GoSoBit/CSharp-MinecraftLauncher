@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Launcher.Contracts;
 using Launcher.Extensions;
 using Launcher.Models;
@@ -49,10 +50,11 @@ namespace Launcher.ViewModels
         protected override async void OnInitialize()
         {
             ProgressDialogController progress = await windowManager.ShowProgressAsync("Please wait", "Loading 'Home' data");
-            progress.SetIndeterminate();
+            progress?.SetIndeterminate();
             Email = (await accountService.GetUserInfoAsync()).Email;
             News = await newsService.GetNewsAsync();
-            await progress.CloseAsync();
+            Task closeAsync = progress?.CloseAsync();
+            if (closeAsync != null) await closeAsync;
         }
     }
 }
