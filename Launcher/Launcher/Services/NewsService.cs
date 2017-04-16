@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 using Launcher.Contracts;
@@ -12,8 +11,14 @@ namespace Launcher.Services
     public class NewsService : INewsService
     {
         private const string NewsUrl = "http://mcupdate.tumblr.com/";
+        private readonly IWebService downloader;
 
-        public async Task<IEnumerable<News>> GetNews()
+        public NewsService(IWebService downloader)
+        {
+            this.downloader = downloader;
+        }
+
+        public async Task<IEnumerable<News>> GetNewsAsync()
         {
             string html = await GetHtmlAsync(NewsUrl);
             var document = new HtmlDocument();
@@ -31,9 +36,9 @@ namespace Launcher.Services
 
         private string DownloadString(string url)
         {
-            using (var client = new WebClient())
+            using (downloader)
             {
-                return client.DownloadString(url);
+                return downloader.DownloadString(url);
             }
         }
 

@@ -12,7 +12,7 @@
             Content = content;
         }
 
-        public string Title { get; }
-        public string Content { get; }
+        public string Title { get; set; }
+        public string Content { get; set; }
     }
 }
