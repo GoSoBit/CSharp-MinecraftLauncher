@@ -89,6 +89,9 @@
     <Compile Include="MojangAccountServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExtensionsTests.cs" />
+    <Compile Include="NewsServiceTests.cs" />
+    <Compile Include="HomeViewModelTests.cs" />
+    <Compile Include="LogoutViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
