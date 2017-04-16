@@ -48,20 +48,18 @@ namespace Launcher.ViewModels
 
         /// <summary>
         /// Called when an attached view's Loaded event fires.
-        /// Application tries to log on if an access token is saved. Otherwise asks for the login data.
+        /// Application tries to refresh authentication. If fails, asks for the login data.
         /// </summary>
         protected override async void OnViewLoaded(object view)
         {
-            bool success;
-
-            if (string.IsNullOrEmpty(Settings.Default.AccessToken))
+            bool success = await accountService.RefreshAuthenticationAsync();
+            if (!success)
             {
                 LoginDialogData credentials = await windowManager.ShowLoginAsync();
-                success = await accountService.AuthenticateAsync(credentials.Username, credentials.Password);
-            }
-            else
-            {
-                success = await accountService.AuthenticateAsync(Settings.Default.AccessToken);
+                if (credentials != null)
+                {
+                    success = await accountService.AuthenticateAsync(credentials.Username, credentials.Password);
+                }
             }
 
             if (!success)

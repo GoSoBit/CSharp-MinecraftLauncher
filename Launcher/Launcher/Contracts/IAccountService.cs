@@ -6,7 +6,7 @@ namespace Launcher.Contracts
     public interface IAccountService
     {
         Task<bool> AuthenticateAsync(string username, string password);
-        Task<bool> AuthenticateAsync(string accessToken);
+        Task<bool> RefreshAuthenticationAsync();
         Task<bool> LogOff();
         Task<UserInfo> GetUserInfoAsync();
     }

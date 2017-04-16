@@ -14,11 +14,13 @@ namespace Launcher.Services
         private const string ApiServerUrl = "https://api.mojang.com";
         private readonly IRestClient apiClient;
         private readonly IRestClient authClient;
-        private readonly string clientToken = Settings.Default.ClientToken;
+        private readonly string clientToken;
         private string accessToken;
 
-        public MojangAccountService(IRestClient authClient, IRestClient apiClient)
+        public MojangAccountService(TokenPayload tokens, IRestClient authClient, IRestClient apiClient)
         {
+            clientToken = tokens.ClientToken;
+            accessToken = tokens.AccessToken;
             this.authClient = authClient;
             this.apiClient = apiClient;
             authClient.BaseUrl = new Uri(AuthServerUrl);
@@ -30,7 +32,7 @@ namespace Launcher.Services
             return await Authenticate("/authenticate", new AuthenticationPayload(email, password, clientToken));
         }
 
-        public async Task<bool> AuthenticateAsync(string accessToken)
+        public async Task<bool> RefreshAuthenticationAsync()
         {
             return await Authenticate("/refresh", new TokenPayload(accessToken, clientToken));
         }
