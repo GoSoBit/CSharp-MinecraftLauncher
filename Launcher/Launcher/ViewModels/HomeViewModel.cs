@@ -14,7 +14,6 @@ namespace Launcher.ViewModels
         private readonly IMetroWindowManager windowManager;
         private string email;
         private IEnumerable<News> news;
-        private string username;
 
         public HomeViewModel(IAccountService accountService, INewsService newsService, IMetroWindowManager windowManager)
         {
@@ -33,12 +32,6 @@ namespace Launcher.ViewModels
             set => this.Set(out email, value);
         }
 
-        public string Username
-        {
-            get => username;
-            set => this.Set(out username, value);
-        }
-
         public IEnumerable<News> News
         {
             get => news;
@@ -47,7 +40,10 @@ namespace Launcher.ViewModels
 
         public async void ShowNews(News news)
         {
-            await windowManager.ShowMessageAsync(news.Title, news.Content);
+            if (news != null)
+            {
+                await windowManager.ShowMessageAsync(news.Title, news.Content);
+            }
         }
 
         protected override async void OnInitialize()
@@ -55,7 +51,7 @@ namespace Launcher.ViewModels
             ProgressDialogController progress = await windowManager.ShowProgressAsync("Please wait", "Loading 'Home' data");
             progress.SetIndeterminate();
             Email = (await accountService.GetUserInfoAsync()).Email;
-            News = await newsService.GetNews();
+            News = await newsService.GetNewsAsync();
             await progress.CloseAsync();
         }
     }
