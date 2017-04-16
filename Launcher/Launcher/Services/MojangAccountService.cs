@@ -37,7 +37,7 @@ namespace Launcher.Services
             return await Authenticate("/refresh", new TokenPayload(accessToken, clientToken));
         }
 
-        public async Task<bool> LogOff()
+        public async Task<bool> LogOffAsync()
         {
             try
             {

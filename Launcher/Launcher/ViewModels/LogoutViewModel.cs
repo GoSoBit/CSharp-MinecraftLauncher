@@ -21,7 +21,7 @@ namespace Launcher.ViewModels
 
         protected override async void OnViewLoaded(object view)
         {
-            if (!await accountService.LogOff())
+            if (!await accountService.LogOffAsync())
             {
                 await windowManager.ShowMessageAsync("Error", "Could not log off");
             }

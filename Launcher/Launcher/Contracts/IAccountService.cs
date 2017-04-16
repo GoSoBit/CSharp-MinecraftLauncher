@@ -7,7 +7,7 @@ namespace Launcher.Contracts
     {
         Task<bool> AuthenticateAsync(string username, string password);
         Task<bool> RefreshAuthenticationAsync();
-        Task<bool> LogOff();
+        Task<bool> LogOffAsync();
         Task<UserInfo> GetUserInfoAsync();
     }
 }
