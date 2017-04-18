@@ -89,6 +89,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\IconButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -141,6 +149,9 @@
     <Compile Include="Contracts\IPayload.cs" />
     <Compile Include="Contracts\IShell.cs" />
     <Compile Include="Contracts\ITab.cs" />
+    <Compile Include="Controls\IconButton.xaml.cs">
+      <DependentUpon>IconButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\NotifyPropertyChangedExExtensions.cs" />
     <Compile Include="Models\AuthenticationPayload.cs" />
     <Compile Include="Models\CamelCaseJsonSerializerStrategy.cs" />
@@ -211,5 +222,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
