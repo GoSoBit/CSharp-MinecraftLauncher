@@ -28,6 +28,8 @@
                     Source="Styles/TextBlock.xaml" />
                 <ResourceDictionary
                     Source="Styles/Tile.xaml" />
+                <ResourceDictionary
+                    Source="Styles/Button.xaml" />
                 <!-- The bootstrapper -->
                 <ResourceDictionary>
                     <projectRoot:Bootstrapper
