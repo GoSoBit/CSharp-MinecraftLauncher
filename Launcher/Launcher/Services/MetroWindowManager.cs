@@ -1,7 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
 using Launcher.Contracts;
+using Launcher.Controls;
+using Launcher.Models;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
@@ -16,11 +20,13 @@ namespace Launcher.Services
     /// </summary>
     public class MetroWindowManager : WindowManager, IMetroWindowManager
     {
-        private readonly MetroWindow window;
+        private readonly IDialogCoordinator dialogCoordinator;
+        private IShell shell;
 
-        public MetroWindowManager(MetroWindow window)
+        public MetroWindowManager(IDialogCoordinator dialogCoordinator, MetroWindow window)
         {
-            this.window = window;
+            this.dialogCoordinator = dialogCoordinator;
+            window.Loaded += (s, e) => shell = window.DataContext as IShell;
         }
 
         /// <summary>
@@ -34,7 +40,7 @@ namespace Launcher.Services
         public async Task<MessageDialogResult> ShowMessageAsync(string title, string message,
             MessageDialogStyle dialogStyle = MessageDialogStyle.Affirmative, MetroDialogSettings settings = null)
         {
-            return await window.ShowMessageAsync(title, message, dialogStyle);
+            return await dialogCoordinator.ShowMessageAsync(shell, title, message, dialogStyle, settings);
         }
 
         /// <summary>
@@ -43,20 +49,12 @@ namespace Launcher.Services
         /// <returns>The async task with login result</returns>
         public async Task<LoginDialogData> ShowLoginAsync()
         {
-            return await window.ShowLoginAsync("Log on", "Please specify your login data", new LoginDialogSettings
+            return await dialogCoordinator.ShowLoginAsync(shell, "Log on", "Please specify your login data", new LoginDialogSettings
             {
                 UsernameWatermark = "Email",
                 NegativeButtonText = "Cancel",
                 NegativeButtonVisibility = Visibility.Visible
             });
-        }
-
-        /// <summary>
-        /// Close the current window.
-        /// </summary>
-        public void CloseWindow()
-        {
-            window.Close();
         }
 
         /// <summary>
@@ -68,7 +66,33 @@ namespace Launcher.Services
         /// <returns>The dialog controller</returns>
         public async Task<ProgressDialogController> ShowProgressAsync(string title, string message, bool isCancelable = false)
         {
-            return await window.ShowProgressAsync(title, message, isCancelable);
+            return await dialogCoordinator.ShowProgressAsync(shell, title, message, isCancelable);
+        }
+
+        /// <summary>
+        /// Shows a <see cref="ChoosePackDialog" /> dialog inside the current window.
+        /// </summary>
+        /// <param name="packs">All packs available to choose from.</param>
+        /// <returns>The dialog</returns>
+        public async Task<IPackDialog> ShowChoosePackDialogAsync(IEnumerable<Pack> packs)
+        {
+            await dialogCoordinator.ShowMetroDialogAsync(shell, new ChoosePackDialog(packs, dialogCoordinator, shell));
+            IPackDialog dialog = await dialogCoordinator.GetCurrentDialogAsync<ChoosePackDialog>(shell);
+            return dialog;
+        }
+
+        /// <summary>
+        /// Shows a indeterminate progress dialog inside the current window.
+        /// </summary>
+        /// <param name="action">Async action to do while showing the progress.</param>
+        /// <returns>The async task.</returns>
+        public async Task ShowProgressAndDoAsync(Func<Task> action)
+        {
+            ProgressDialogController progress = await dialogCoordinator.ShowProgressAsync(shell, "Please wait", "Loading data");
+            progress?.SetIndeterminate();
+            await action();
+            Task closeAsync = progress?.CloseAsync();
+            if (closeAsync != null) await closeAsync;
         }
     }
 }

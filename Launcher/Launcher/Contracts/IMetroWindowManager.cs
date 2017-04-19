@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Launcher.Models;
 using MahApps.Metro.Controls.Dialogs;
 
 namespace Launcher.Contracts
@@ -12,7 +15,8 @@ namespace Launcher.Contracts
             MetroDialogSettings settings = null);
 
         Task<LoginDialogData> ShowLoginAsync();
-        void CloseWindow();
         Task<ProgressDialogController> ShowProgressAsync(string title, string message, bool isCancelable = false);
+        Task<IPackDialog> ShowChoosePackDialogAsync(IEnumerable<Pack> packs);
+        Task ShowProgressAndDoAsync(Func<Task> action);
     }
 }

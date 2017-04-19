@@ -11,6 +11,7 @@ using Launcher.Properties;
 using Launcher.ViewModels;
 using Launcher.Views;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using RestSharp;
 
 namespace Launcher
@@ -60,6 +61,7 @@ namespace Launcher
             //Register others
             builder.RegisterType<RestClient>().As<IRestClient>();
             builder.Register(x => new TokenPayload(Settings.Default.AccessToken, Settings.Default.ClientToken)).AsSelf();
+            builder.Register(x => DialogCoordinator.Instance).As<IDialogCoordinator>();
 
             container = builder.Build();
         }
