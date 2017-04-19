@@ -13,5 +13,7 @@
     VerticalAlignment="Top"
     Style="{StaticResource IconButtonStyle}">
     <iconPacks:PackIconModern
-        Kind="{Binding Icon}" />
+        Kind="{Binding Icon}"
+        Width="22"
+        Height="22" />
 </Button>
