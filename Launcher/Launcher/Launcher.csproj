@@ -93,6 +93,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ChoosePackDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,6 +147,8 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Contracts\IAccountService.cs" />
+    <Compile Include="Contracts\IPackDialog.cs" />
+    <Compile Include="Contracts\IPacksService.cs" />
     <Compile Include="Contracts\IWebService.cs" />
     <Compile Include="Contracts\IMetroWindowManager.cs" />
     <Compile Include="Contracts\INewsService.cs" />
@@ -152,15 +158,21 @@
     <Compile Include="Controls\IconButton.xaml.cs">
       <DependentUpon>IconButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ChoosePackDialog.xaml.cs">
+      <DependentUpon>ChoosePackDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\NotifyPropertyChangedExExtensions.cs" />
     <Compile Include="Models\AuthenticationPayload.cs" />
     <Compile Include="Models\CamelCaseJsonSerializerStrategy.cs" />
     <Compile Include="Models\News.cs" />
+    <Compile Include="Models\Pack.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\TabBase.cs" />
     <Compile Include="Models\TokenPayload.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Services\MetroWindowManager.cs" />
+    <Compile Include="Services\PacksService.cs" />
     <Compile Include="Services\MojangAccountService.cs" />
     <Compile Include="Services\NewsService.cs" />
     <Compile Include="Services\WebService.cs">

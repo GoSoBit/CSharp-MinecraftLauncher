@@ -1,0 +1,45 @@
+﻿<dialogs:CustomDialog
+    x:Class="Launcher.Controls.ChoosePackDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    Title="Add pack">
+    <Grid>
+        <TextBlock
+            Text="Choose version"
+            Style="{DynamicResource BodyTextBlockStyle}"
+            Margin="0,4,0,0" />
+        <ListBox
+            x:Name="PacksBox"
+            Margin="-12,22,0,0"
+            Height="220"
+            VerticalContentAlignment="Stretch"
+            VerticalAlignment="Top"
+            SelectionChanged="PacksBox_OnSelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel
+                        Margin="8">
+                        <TextBlock
+                            Text="{Binding Id}"
+                            Style="{DynamicResource SubtitleTextBlockStyle}" />
+                        <TextBlock
+                            Text="{Binding Type}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel
+                        Orientation="Vertical"
+                        Height="200" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
+</dialogs:CustomDialog>
