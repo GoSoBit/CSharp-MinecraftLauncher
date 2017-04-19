@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using Launcher.Contracts;
 using Launcher.Extensions;
 using Launcher.Models;
-using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.IconPacks;
 
 namespace Launcher.ViewModels
@@ -49,12 +47,11 @@ namespace Launcher.ViewModels
 
         protected override async void OnInitialize()
         {
-            ProgressDialogController progress = await windowManager.ShowProgressAsync("Please wait", "Loading 'Home' data");
-            progress?.SetIndeterminate();
-            Email = (await accountService.GetUserInfoAsync()).Email;
-            News = await newsService.GetNewsAsync();
-            Task closeAsync = progress?.CloseAsync();
-            if (closeAsync != null) await closeAsync;
+            await windowManager.ShowProgressAndDoAsync(async () =>
+            {
+                Email = (await accountService.GetUserInfoAsync()).Email;
+                News = await newsService.GetNewsAsync();
+            });
         }
     }
 }
