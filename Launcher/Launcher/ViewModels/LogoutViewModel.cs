@@ -1,4 +1,5 @@
-﻿using Launcher.Contracts;
+﻿using System.Windows;
+using Launcher.Contracts;
 using Launcher.Models;
 using MahApps.Metro.IconPacks;
 
@@ -26,7 +27,7 @@ namespace Launcher.ViewModels
                 await windowManager.ShowMessageAsync("Error", "Could not log off");
             }
 
-            windowManager.CloseWindow();
+            Application.Current.Shutdown();
         }
     }
 }
