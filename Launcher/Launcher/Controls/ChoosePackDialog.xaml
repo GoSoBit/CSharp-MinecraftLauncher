@@ -40,6 +40,15 @@
                         Height="200" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
+            <ListBox.ItemContainerStyle>
+                <Style
+                    TargetType="ListBoxItem"
+                    BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                    <Setter
+                        Property="Padding"
+                        Value="0" />
+                </Style>
+            </ListBox.ItemContainerStyle>
         </ListBox>
     </Grid>
 </dialogs:CustomDialog>
