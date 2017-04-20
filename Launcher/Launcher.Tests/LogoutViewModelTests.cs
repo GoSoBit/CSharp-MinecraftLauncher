@@ -25,7 +25,6 @@ namespace Launcher.Tests
             fakeView.RaiseEvent(new RoutedEventArgs(FrameworkElement.LoadedEvent));
 
             accountServiceMock.Verify(x => x.LogOffAsync(), Times.Once);
-            windowManagerMock.Verify(x => x.CloseWindow(), Times.Once);
         }
     }
 }
