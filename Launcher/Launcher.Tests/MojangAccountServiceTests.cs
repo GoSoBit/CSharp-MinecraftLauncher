@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using Launcher.Models;
 using Launcher.Services;
+using Launcher.Tests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ploeh.AutoFixture;
 using RestSharp;
-using RestSharp.Serializers;
 
 namespace Launcher.Tests
 {
@@ -14,9 +14,9 @@ namespace Launcher.Tests
     public class MojangAccountServiceTests
     {
         private readonly IFixture fixture = new Fixture();
+        private readonly TokenPayload invalidTokenPayload;
         private readonly AuthenticationPayload validAuthPayload;
         private readonly TokenPayload validTokenPayload;
-        private readonly TokenPayload invalidTokenPayload;
 
         public MojangAccountServiceTests()
         {
@@ -60,10 +60,11 @@ namespace Launcher.Tests
         public async Task ShouldLogOff()
         {
             var restClientMock = new Mock<IRestClient>();
-            restClientMock.Setup(x => x.ExecuteTaskAsync(It.IsAny<IRestRequest>())).ReturnsAsync(new RestResponse { StatusCode = HttpStatusCode.NoContent });
+            restClientMock.Setup(x => x.ExecuteTaskAsync(It.IsAny<IRestRequest>()))
+                .ReturnsAsync(new RestResponse { StatusCode = HttpStatusCode.NoContent });
 
             var service = new MojangAccountService(validTokenPayload, restClientMock.Object, restClientMock.Object);
-            var result = await service.LogOffAsync();
+            bool result = await service.LogOffAsync();
 
             Assert.IsTrue(result);
         }
@@ -73,12 +74,11 @@ namespace Launcher.Tests
         {
             var validUserInfo = fixture.Create<UserInfo>();
             var restClientMock = new Mock<IRestClient>();
-            restClientMock.
-                Setup(x => x.ExecuteTaskAsync<UserInfo>(It.IsAny<IRestRequest>()))
+            restClientMock.Setup(x => x.ExecuteTaskAsync<UserInfo>(It.IsAny<IRestRequest>()))
                 .ReturnsAsync(new RestResponse<UserInfo> { Data = validUserInfo });
 
             var service = new MojangAccountService(validTokenPayload, restClientMock.Object, restClientMock.Object);
-            var result = await service.GetUserInfoAsync();
+            UserInfo result = await service.GetUserInfoAsync();
 
             Assert.AreEqual(validUserInfo, result);
         }
@@ -87,24 +87,10 @@ namespace Launcher.Tests
         {
             var mock = new Mock<IRestClient>();
             mock
-                .Setup(x => x.ExecuteTaskAsync<TokenPayload>(It.Is<IRestRequest>(r => BodyEquals(r, body))))
+                .Setup(x => x.ExecuteTaskAsync<TokenPayload>(It.Is<IRestRequest>(r => r.JsonBodyEquals(body))))
                 .ReturnsAsync(new RestResponse<TokenPayload> { StatusCode = HttpStatusCode.OK, Data = validTokenPayload });
 
             return mock;
-        }
-
-        private bool BodyEquals(IRestRequest request, object value)
-        {
-            var serializer = new JsonSerializer();
-            string valueJson = serializer.Serialize(value);
-            string bodyJson = GetBody(request);
-
-            return bodyJson == valueJson;
-        }
-
-        private string GetBody(IRestRequest request)
-        {
-            return request.Parameters[0].Value.ToString();
         }
     }
 }
