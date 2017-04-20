@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Controls;
+using System.Threading.Tasks;
+using System.Windows;
 using Launcher.Contracts;
 using Launcher.Models;
 using MahApps.Metro.Controls.Dialogs;
@@ -23,9 +24,19 @@ namespace Launcher.Controls
 
         public event EventHandler<Pack> ClosedDialog;
 
-        private async void PacksBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ButtonOK_OnClick(object sender, RoutedEventArgs e)
         {
-            var result = PacksBox.SelectedItems[0] as Pack;
+            var result = PacksBox.SelectedItem as Pack;
+            await CloseDialog(result);
+        }
+
+        private async void ButtonCancel_OnClick(object sender, RoutedEventArgs e)
+        {
+            await CloseDialog(null);
+        }
+
+        private async Task CloseDialog(Pack result)
+        {
             await dialogCoordinator.HideMetroDialogAsync(context, this);
             ClosedDialog?.Invoke(this, result);
         }
