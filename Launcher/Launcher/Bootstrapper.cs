@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Windows;
 using Autofac;
@@ -46,7 +45,7 @@ namespace Launcher
             //Register tabs
             builder
                 .RegisterAssemblyTypes(currentAssembly)
-                .Where(IsTab)
+                .Where(type => type.IsAssignableTo<ITab>())
                 .AsSelf()
                 .As<ITab>()
                 .SingleInstance();
@@ -54,7 +53,7 @@ namespace Launcher
             //Register services
             builder
                 .RegisterAssemblyTypes(currentAssembly)
-                .Where(IsService)
+                .Where(x => x.FullName.Contains("Services"))
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
@@ -85,18 +84,6 @@ namespace Launcher
         {
             Type enumerable = typeof(IEnumerable<>).MakeGenericType(service);
             return (IEnumerable<object>)container.Resolve(enumerable);
-        }
-
-        private static bool IsTab(Type type)
-        {
-            string name = type.Name;
-            return name.EndsWith("ViewModel") && type.IsAssignableTo<ITab>();
-        }
-
-        private static bool IsService(Type type)
-        {
-            string[] serviceSuffixes = { "Service", "Manager", "Helper" };
-            return serviceSuffixes.Any(suffix => type.Name.EndsWith(suffix));
         }
 
         private static void EnsureClientTokenExists()
