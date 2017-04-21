@@ -1,4 +1,6 @@
-﻿namespace Launcher.Models
+﻿using System;
+
+namespace Launcher.Models
 {
     public class Pack
     {
@@ -13,6 +15,7 @@
             Url = url;
         }
 
+        public Guid Guid { get; set; } = Guid.NewGuid();
         public string Id { get; set; }
         public string Type { get; set; }
         public string Url { get; set; }
