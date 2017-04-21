@@ -9,24 +9,31 @@ using MahApps.Metro.Controls.Dialogs;
 
 namespace Launcher.Controls
 {
-    public partial class ChoosePackDialog : IPackDialog
+    public partial class PackManagementDialog : IPackDialog
     {
         private readonly object context;
+        private readonly Pack packToEdit;
+        private readonly IEnumerable<Pack> packs;
         private readonly IDialogCoordinator dialogCoordinator;
 
-        public ChoosePackDialog(IEnumerable<Pack> packs, IDialogCoordinator dialogCoordinator, object context)
+        public PackManagementDialog(IEnumerable<Pack> packs, IDialogCoordinator dialogCoordinator, object context, Pack packToEdit)
         {
+            this.packs = packs;
             this.dialogCoordinator = dialogCoordinator;
             this.context = context;
+            this.packToEdit = packToEdit;
             InitializeComponent();
             PacksBox.ItemsSource = packs.Where(x => x.Type == "release");
+            PacksBox.SelectedItem = packs.FirstOrDefault(x => x.Id == packToEdit.Id);
         }
 
         public event EventHandler<Pack> ClosedDialog;
 
         private async void ButtonOK_OnClick(object sender, RoutedEventArgs e)
         {
-            var result = PacksBox.SelectedItem as Pack;
+            string selectedId = PacksBox.Text;
+            Pack result = packs.FirstOrDefault(x => x.Id == selectedId);
+            result.Guid = packToEdit.Guid;
             await CloseDialog(result);
         }
 

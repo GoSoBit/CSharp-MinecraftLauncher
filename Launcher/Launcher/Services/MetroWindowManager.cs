@@ -70,14 +70,14 @@ namespace Launcher.Services
         }
 
         /// <summary>
-        /// Shows a <see cref="ChoosePackDialog" /> dialog inside the current window.
+        /// Shows a <see cref="PackManagementDialog" /> dialog inside the current window.
         /// </summary>
         /// <param name="packs">All packs available to choose from.</param>
         /// <returns>The dialog</returns>
-        public async Task<IPackDialog> ShowChoosePackDialogAsync(IEnumerable<Pack> packs)
+        public async Task<IPackDialog> ShowPackManagementDialogAsync(IEnumerable<Pack> packs, Pack packToEdit)
         {
-            await dialogCoordinator.ShowMetroDialogAsync(shell, new ChoosePackDialog(packs, dialogCoordinator, shell));
-            IPackDialog dialog = await dialogCoordinator.GetCurrentDialogAsync<ChoosePackDialog>(shell);
+            await dialogCoordinator.ShowMetroDialogAsync(shell, new PackManagementDialog(packs, dialogCoordinator, shell, packToEdit));
+            IPackDialog dialog = await dialogCoordinator.GetCurrentDialogAsync<PackManagementDialog>(shell);
             return dialog;
         }
 
