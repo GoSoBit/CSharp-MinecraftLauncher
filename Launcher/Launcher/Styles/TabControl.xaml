@@ -24,7 +24,7 @@
                 BorderThickness="{TemplateBinding BorderThickness}"
                 Background="{TemplateBinding Background}"
                 BorderBrush="{TemplateBinding BorderBrush}"
-                Padding="4">
+                Padding="8">
                 <controls:TransitioningContentControl
                     x:Name="PART_SelectedContentHost"
                     Content="{TemplateBinding SelectedContent}"

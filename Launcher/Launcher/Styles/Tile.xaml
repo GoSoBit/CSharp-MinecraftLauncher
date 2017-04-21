@@ -15,8 +15,7 @@
                             <DoubleAnimation
                                 Storyboard.TargetProperty="Background.Opacity"
                                 Duration="0:0:0.200"
-                                From="1"
-                                To="0.8" />
+                                To="0.6" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -26,7 +25,6 @@
                             <DoubleAnimation
                                 Storyboard.TargetProperty="Background.Opacity"
                                 Duration="0:0:0.200"
-                                From="0.8"
                                 To="1" />
                         </Storyboard>
                     </BeginStoryboard>
