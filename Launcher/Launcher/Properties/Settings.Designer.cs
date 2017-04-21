@@ -46,5 +46,17 @@ namespace Launcher.Properties {
                 this["ClientToken"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PacksListXml {
+            get {
+                return ((string)(this["PacksListXml"]));
+            }
+            set {
+                this["PacksListXml"] = value;
+            }
+        }
     }
 }
