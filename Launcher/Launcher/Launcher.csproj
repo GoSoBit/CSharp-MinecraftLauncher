@@ -93,7 +93,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChoosePackDialog.xaml">
+    <Page Include="Controls\PackManagementDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,8 +158,8 @@
     <Compile Include="Controls\IconButton.xaml.cs">
       <DependentUpon>IconButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChoosePackDialog.xaml.cs">
-      <DependentUpon>ChoosePackDialog.xaml</DependentUpon>
+    <Compile Include="Controls\PackManagementDialog.xaml.cs">
+      <DependentUpon>PackManagementDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\CollectionsExtensions.cs" />
     <Compile Include="Extensions\NotifyPropertyChangedExExtensions.cs" />
