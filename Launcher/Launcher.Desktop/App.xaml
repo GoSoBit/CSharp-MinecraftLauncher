@@ -30,6 +30,8 @@
                     Source="Styles/Tile.xaml" />
                 <ResourceDictionary
                     Source="Styles/Button.xaml" />
+                <ResourceDictionary
+                    Source="Styles/FrameworkElement.xaml" />
                 <!-- The bootstrapper -->
                 <ResourceDictionary>
                     <projectRoot:Bootstrapper
