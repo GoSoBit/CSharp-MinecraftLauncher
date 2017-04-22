@@ -1,9 +1,8 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
-using Launcher.Contracts;
-using Launcher.ViewModels;
+using Launcher.Desktop.Contracts;
+using Launcher.Desktop.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

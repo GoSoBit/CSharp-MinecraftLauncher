@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Launcher.Contracts;
-using Launcher.Models;
-using Launcher.Services;
+using Launcher.Desktop.Contracts;
+using Launcher.Desktop.Models;
+using Launcher.Desktop.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

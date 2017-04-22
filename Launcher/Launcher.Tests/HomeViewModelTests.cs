@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Caliburn.Micro;
-using Launcher.Contracts;
-using Launcher.Models;
-using Launcher.ViewModels;
+using Launcher.Desktop.Contracts;
+using Launcher.Desktop.Models;
+using Launcher.Desktop.ViewModels;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

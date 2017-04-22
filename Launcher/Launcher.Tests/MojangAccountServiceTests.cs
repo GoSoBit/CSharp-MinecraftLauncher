@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
-using Launcher.Models;
-using Launcher.Services;
+using Launcher.Desktop.Models;
+using Launcher.Desktop.Services;
 using Launcher.Tests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

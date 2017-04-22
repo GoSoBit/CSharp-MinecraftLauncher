@@ -1,8 +1,9 @@
 ﻿using Caliburn.Micro;
+using Launcher.Desktop.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Launcher.Extensions;
 using Moq;
 using Ploeh.AutoFixture;
+
 // ReSharper disable ExplicitCallerInfoArgument
 
 namespace Launcher.Tests
