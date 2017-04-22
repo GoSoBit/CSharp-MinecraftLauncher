@@ -22,7 +22,8 @@
             Margin="53,0,0,0" />
         <ItemsControl
             Margin="-4,53,0,0"
-            x:Name="Packs">
+            x:Name="Packs"
+            ItemContainerStyle="{StaticResource AnimatedItemContainerStyle}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <mahappsControls:Tile
