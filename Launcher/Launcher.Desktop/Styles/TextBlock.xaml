@@ -61,4 +61,10 @@
             Property="FontSize"
             Value="12" />
     </Style>
+    <DataTemplate
+        x:Key="TitleTextBlockDataTemplate">
+        <TextBlock
+            Text="{Binding}"
+            Style="{StaticResource TitleTextBlockStyle}" />
+    </DataTemplate>
 </ResourceDictionary>

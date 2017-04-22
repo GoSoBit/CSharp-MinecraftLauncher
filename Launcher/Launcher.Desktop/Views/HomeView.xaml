@@ -18,10 +18,10 @@
             <TextBlock
                 Text="Logged On"
                 Style="{StaticResource HeaderTextBlockStyle}" />
-            <TextBlock
-                x:Name="Email"
-                Style="{StaticResource TitleTextBlockStyle}"
-                Margin="0,4,0,0" />
+            <controls:TransitioningContentControl
+                Content="{Binding Email}"
+                Margin="0,4,0,0"
+                ContentTemplate="{StaticResource TitleTextBlockDataTemplate}" />
         </StackPanel>
         <TextBlock
             Grid.Column="1"
