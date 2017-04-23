@@ -31,7 +31,7 @@ namespace Launcher.Desktop.Controls
 
         private async void ButtonOK_OnClick(object sender, RoutedEventArgs e)
         {
-            string selectedId = PacksBox.Text;
+            string selectedId = ((Pack)PacksBox.SelectedItem).Id;
             Pack result = packs.FirstOrDefault(x => x.Id == selectedId);
             result.Guid = packToEdit.Guid;
             await CloseDialog(result);

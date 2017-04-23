@@ -19,12 +19,23 @@
         </Grid.RowDefinitions>
         <ComboBox
             x:Name="PacksBox"
-            DisplayMemberPath="Id"
             VerticalAlignment="Top"
             Margin="0,4,0,0"
             FontSize="15"
             Height="28"
-            controls:TextBoxHelper.Watermark="Choose version" />
+            controls:TextBoxHelper.Watermark="Choose version">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                            Text="{Binding Type}" />
+                        <TextBlock
+                            Margin="4,0,0,0"
+                            Text="{Binding Id}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         <StackPanel
             Grid.Row="1"
             Height="85"
@@ -37,13 +48,13 @@
                 Content="Ok"
                 Style="{DynamicResource AccentedSquareButtonStyle}"
                 controls:ControlsHelper.ContentCharacterCasing="Normal"
-                Click="ButtonOK_OnClick"/>
+                Click="ButtonOK_OnClick" />
             <Button
                 Height="35"
                 MinWidth="80"
                 Margin="0,0,5,0"
                 Content="Cancel"
-                Click="ButtonCancel_OnClick"/>
+                Click="ButtonCancel_OnClick" />
         </StackPanel>
     </Grid>
 </dialogs:CustomDialog>
