@@ -58,5 +58,29 @@ namespace Launcher.Desktop.Properties {
                 this["PacksListXml"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AllowSnapshots {
+            get {
+                return ((bool)(this["AllowSnapshots"]));
+            }
+            set {
+                this["AllowSnapshots"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AllowBetaAndAlpha {
+            get {
+                return ((bool)(this["AllowBetaAndAlpha"]));
+            }
+            set {
+                this["AllowBetaAndAlpha"] = value;
+            }
+        }
     }
 }
