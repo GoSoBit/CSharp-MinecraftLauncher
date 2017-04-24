@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Launcher.Desktop.Contracts;
+using Launcher.Desktop.Extensions;
 using Launcher.Desktop.Models;
 using Launcher.Desktop.Properties;
 using Launcher.Desktop.Services;
-using Launcher.Desktop.Extensions;
 using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.IconPacks;
 

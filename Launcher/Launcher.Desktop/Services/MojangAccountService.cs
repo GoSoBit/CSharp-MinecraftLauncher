@@ -35,8 +35,8 @@ namespace Launcher.Desktop.Services
 
         public async Task<(bool success, bool userCanceled)> AuthenticateAsync(LoginDialogData credentials)
         {
-            return credentials == null 
-                ? (false, true) 
+            return credentials == null
+                ? (false, true)
                 : (await AuthenticateAsync(credentials.Username, credentials.Password), false);
         }
 

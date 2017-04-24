@@ -1,11 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace Launcher.Desktop.Views
+﻿namespace Launcher.Desktop.Views
 {
-    /// <summary>
-    /// Interaction logic for LogoutView.xaml
-    /// </summary>
-    public partial class LogoutView : UserControl
+    public partial class LogoutView
     {
         public LogoutView()
         {

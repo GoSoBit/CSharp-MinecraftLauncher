@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Launcher.Desktop.Contracts;
-using Launcher.Desktop.Models;
 using Launcher.Desktop.Extensions;
+using Launcher.Desktop.Models;
 using MahApps.Metro.IconPacks;
 
 namespace Launcher.Desktop.ViewModels

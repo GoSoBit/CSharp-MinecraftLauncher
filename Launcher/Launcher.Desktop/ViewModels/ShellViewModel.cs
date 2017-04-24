@@ -6,8 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using Launcher.Desktop.Contracts;
-using Launcher.Desktop.Properties;
 using Launcher.Desktop.Extensions;
+using Launcher.Desktop.Properties;
 
 namespace Launcher.Desktop.ViewModels
 {
@@ -52,7 +52,7 @@ namespace Launcher.Desktop.ViewModels
         /// </summary>
         protected override async void OnViewLoaded(object view)
         {
-            bool canceled = false;
+            var canceled = false;
             bool authenticated = await accountService.RefreshAuthenticationAsync();
             if (!authenticated)
             {

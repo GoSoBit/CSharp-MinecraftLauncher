@@ -7,8 +7,8 @@ namespace Launcher.Desktop.ViewModels
 {
     public sealed class SettingsViewModel : TabBase
     {
-        private bool allowSnapshots;
         private bool allowBetaAndAlpha;
+        private bool allowSnapshots;
 
         public SettingsViewModel()
         {
