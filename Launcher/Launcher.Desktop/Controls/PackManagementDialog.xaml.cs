@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Launcher.Desktop.Contracts;
 using Launcher.Desktop.Models;
+using Launcher.Desktop.Properties;
 using MahApps.Metro.Controls.Dialogs;
 
 namespace Launcher.Desktop.Controls
@@ -23,7 +24,7 @@ namespace Launcher.Desktop.Controls
             this.context = context;
             this.packToEdit = packToEdit;
             InitializeComponent();
-            PacksBox.ItemsSource = packs.Where(x => x.Type == "release");
+            PacksBox.ItemsSource = packs.Where(IsAllowed);
             PacksBox.SelectedItem = packs.FirstOrDefault(x => x.Id == packToEdit.Id);
         }
 
@@ -46,6 +47,13 @@ namespace Launcher.Desktop.Controls
         {
             await dialogCoordinator.HideMetroDialogAsync(context, this);
             ClosedDialog?.Invoke(this, result);
+        }
+
+        private bool IsAllowed(Pack pack)
+        {
+            return pack.Type == "release"
+                || pack.Type == "snapshot" && Settings.Default.AllowSnapshots
+                || (pack.Type == "old_beta" || pack.Type == "old_alpha") && Settings.Default.AllowBetaAndAlpha;
         }
     }
 }
