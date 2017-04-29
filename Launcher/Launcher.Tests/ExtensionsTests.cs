@@ -1,5 +1,9 @@
-﻿using Caliburn.Micro;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Caliburn.Micro;
 using Launcher.Desktop.Extensions;
+using Launcher.Desktop.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ploeh.AutoFixture;
@@ -28,6 +32,44 @@ namespace Launcher.Tests
 
             Assert.AreEqual(field, value2);
             viewModelMock.Verify(x => x.NotifyOfPropertyChange(propertyName), Times.Exactly(2));
+        }
+
+        [TestMethod]
+        public void Collections_ShouldMakeObservableCollectionFromEnumerable()
+        {
+            IEnumerable<object> enumerable = new List<object>();
+            ICollection<object> collection = new Collection<object>();
+            ObservableCollection<object> observableCollection = new ObservableCollection<object>();
+
+            var observableCollection1 = enumerable.ToObservable();
+            var observableCollection2 = collection.ToObservable();
+            var observableCollection3 = observableCollection.ToObservable();
+
+            Assert.IsInstanceOfType(observableCollection1, typeof(ObservableCollection<object>));
+            Assert.IsInstanceOfType(observableCollection2, typeof(ObservableCollection<object>));
+            Assert.IsInstanceOfType(observableCollection3, typeof(ObservableCollection<object>));
+        }
+
+        [TestMethod]
+        public void Collections_ShouldAddOrUpdate()
+        {
+            var list = new List<Profile>
+            {
+                new Profile("1", "mati", false),
+                new Profile("2", "kapi", false),
+                new Profile("3", "", true)
+            };
+            var updatedProfile = new Profile("1", "dada", false);
+            var addedProfile = new Profile("4", "mati", false);
+
+            list.AddOrUpdate(updatedProfile, x => x.Id == "1");
+            list.AddOrUpdate(addedProfile, x => x.Id == "4");
+            list.AddOrUpdate(null, x => x.Id == "2");
+
+            Assert.AreEqual(updatedProfile, list.FirstOrDefault(x => x.Id == "1"));
+            Assert.AreEqual(addedProfile, list.FirstOrDefault(x => x.Id == "4"));
+            Assert.AreEqual(4, list.Count);
+            Assert.IsTrue(list.Contains(null));
         }
     }
 }
