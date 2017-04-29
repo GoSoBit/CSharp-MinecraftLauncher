@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using Launcher.Desktop.Contracts;
 using Launcher.Desktop.Models;
@@ -61,21 +63,15 @@ namespace Launcher.Tests
         }
 
         [TestMethod]
-        public void ShouldLoadEmailAndNews()
+        public void ShouldTryLoadingEmailAndNews()
         {
-            var newsList = fixture.CreateMany<News>().ToList();
-            var userInfo = fixture.Create<UserInfo>();
-            var newsServiceMock = new Mock<INewsService>();
-            newsServiceMock.Setup(x => x.GetNewsAsync()).ReturnsAsync(newsList);
-            var accountServiceMock = new Mock<IAccountService>();
-            accountServiceMock.Setup(x => x.GetUserInfoAsync()).ReturnsAsync(userInfo);
-            var viewModel = new HomeViewModel(accountServiceMock.Object, newsServiceMock.Object, windowManagerEmptyMock.Object);
+            var windowManagerMock = new Mock<IMetroWindowManager>();
+            windowManagerMock.Setup(x => x.ShowProgressAndDoAsync(It.IsAny<Func<Task>>()));
+            var viewModel = new HomeViewModel(accountServiceEmptyMock.Object, newsServiceEmptyMock.Object, windowManagerMock.Object);
 
             ScreenExtensions.TryActivate(viewModel);
 
-            Assert.AreEqual(newsList, viewModel.News);
-            Assert.AreEqual(userInfo.Email, viewModel.Email);
-            newsServiceMock.Verify(x => x.GetNewsAsync(), Times.Once);
+            windowManagerMock.Verify(x => x.ShowProgressAndDoAsync(It.IsAny<Func<Task>>()), Times.Once);
         }
     }
 }
