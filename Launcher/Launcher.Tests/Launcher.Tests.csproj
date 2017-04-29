@@ -94,6 +94,7 @@
     <Compile Include="NewsServiceTests.cs" />
     <Compile Include="HomeViewModelTests.cs" />
     <Compile Include="LogoutViewModelTests.cs" />
+    <Compile Include="XmlSerializationServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
