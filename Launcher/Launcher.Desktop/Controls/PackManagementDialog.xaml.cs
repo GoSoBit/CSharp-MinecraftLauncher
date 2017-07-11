@@ -17,12 +17,13 @@ namespace Launcher.Desktop.Controls
         private readonly IEnumerable<Pack> packs;
         private readonly IDialogCoordinator dialogCoordinator;
 
-        public PackManagementDialog(IEnumerable<Pack> packs, IDialogCoordinator dialogCoordinator, object context, Pack packToEdit)
+        public PackManagementDialog(IEnumerable<Pack> packs, IDialogCoordinator dialogCoordinator, object context, Pack packToEdit, string action)
         {
             this.packs = packs;
             this.dialogCoordinator = dialogCoordinator;
             this.context = context;
             this.packToEdit = packToEdit;
+            Title = action + " pack";
             InitializeComponent();
             PacksBox.ItemsSource = packs.Where(IsAllowed);
             PacksBox.SelectedItem = packs.FirstOrDefault(x => x.Id == packToEdit.Id);
@@ -32,7 +33,13 @@ namespace Launcher.Desktop.Controls
 
         private async void ButtonOK_OnClick(object sender, RoutedEventArgs e)
         {
-            string selectedId = ((Pack)PacksBox.SelectedItem).Id;
+            string selectedId = (PacksBox.SelectedItem as Pack)?.Id;
+            if (string.IsNullOrEmpty(selectedId))
+            {
+                await CloseDialog(null);
+                return;
+            }
+
             Pack result = packs.FirstOrDefault(x => x.Id == selectedId);
             result.Guid = packToEdit.Guid;
             await CloseDialog(result);
