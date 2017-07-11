@@ -42,8 +42,9 @@ namespace Launcher.Desktop.ViewModels
         public async Task OpenPackManagement(Pack pack)
         {
             await EnsureAllAvailablePackAreLoaded();
+            string action = string.IsNullOrEmpty(pack.Id) ? "New" : "Edit";
 
-            IPackDialog dialog = await windowManager.ShowPackManagementDialogAsync(allPacks, pack);
+            IPackDialog dialog = await windowManager.ShowPackManagementDialogAsync(allPacks, pack, action);
             dialog.ClosedDialog += (s, result) =>
             {
                 if (result == null) return;

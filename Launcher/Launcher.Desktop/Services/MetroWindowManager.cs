@@ -73,9 +73,9 @@ namespace Launcher.Desktop.Services
         /// </summary>
         /// <param name="packs">All packs available to choose from.</param>
         /// <returns>The dialog</returns>
-        public async Task<IPackDialog> ShowPackManagementDialogAsync(IEnumerable<Pack> packs, Pack packToEdit)
+        public async Task<IPackDialog> ShowPackManagementDialogAsync(IEnumerable<Pack> packs, Pack packToEdit, string action)
         {
-            await dialogCoordinator.ShowMetroDialogAsync(shell, new PackManagementDialog(packs, dialogCoordinator, shell, packToEdit));
+            await dialogCoordinator.ShowMetroDialogAsync(shell, new PackManagementDialog(packs, dialogCoordinator, shell, packToEdit, action));
             IPackDialog dialog = await dialogCoordinator.GetCurrentDialogAsync<PackManagementDialog>(shell);
             return dialog;
         }
