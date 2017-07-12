@@ -14,6 +14,11 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition
+                Height="110" />
+        </Grid.RowDefinitions>
         <StackPanel>
             <TextBlock
                 Text="Logged On"
@@ -31,7 +36,7 @@
             VerticalAlignment="Top" />
         <ScrollViewer
             Grid.Column="1"
-            Margin="0,41,0,0"
+            Margin="0,41,0,8"
             VerticalScrollBarVisibility="Auto">
             <ItemsControl
                 x:Name="News"
@@ -56,5 +61,20 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+        <Grid
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Margin="0,12,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition
+                    Width="3*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                x:Name="StartMinecraft"
+                Grid.Column="1"
+                Style="{StaticResource PlayButtonStyle}" />
+        </Grid>
     </Grid>
 </UserControl>
