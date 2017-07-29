@@ -17,5 +17,11 @@
     <Setting Name="AllowBetaAndAlpha" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="JavaBinDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Memory" Type="System.Int16" Scope="User">
+      <Value Profile="(Default)">1024</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

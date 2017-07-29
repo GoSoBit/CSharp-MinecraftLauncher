@@ -82,5 +82,29 @@ namespace Launcher.Desktop.Properties {
                 this["AllowBetaAndAlpha"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string JavaBinDirectory {
+            get {
+                return ((string)(this["JavaBinDirectory"]));
+            }
+            set {
+                this["JavaBinDirectory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1024")]
+        public short Memory {
+            get {
+                return ((short)(this["Memory"]));
+            }
+            set {
+                this["Memory"] = value;
+            }
+        }
     }
 }

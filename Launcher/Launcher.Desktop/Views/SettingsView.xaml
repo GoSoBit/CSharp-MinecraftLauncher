@@ -4,26 +4,61 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:customControls="clr-namespace:Launcher.Desktop.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="300">
+    d:DesignWidth="900">
     <Grid>
         <ScrollViewer>
-            <StackPanel>
-                <TextBlock
-                    Text="Packs and versions"
-                    Style="{StaticResource TitleTextBlockStyle}"
-                    Margin="0,0,0,8" />
-                <controls:ToggleSwitch
-                    Header="Allow snapshots"
-                    Style="{DynamicResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
-                    IsChecked="{Binding AllowSnapshots}"
-                    Margin="0,0,0,8"/>
-                <controls:ToggleSwitch
-                    Header="Allow beta and alpha"
-                    IsChecked="{Binding AllowBetaAndAlpha}"
-                    Style="{DynamicResource MahApps.Metro.Styles.ToggleSwitch.Win10}" />
+            <StackPanel
+                Orientation="Horizontal">
+                <StackPanel>
+                    <TextBlock
+                        Text="Packs and versions"
+                        Style="{StaticResource TitleTextBlockStyle}"
+                        Margin="0,0,0,8" />
+                    <mahapps:ToggleSwitch
+                        Header="Allow snapshots"
+                        Style="{DynamicResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
+                        IsChecked="{Binding AllowSnapshots}"
+                        Margin="0,0,0,8" />
+                    <mahapps:ToggleSwitch
+                        Header="Allow beta and alpha"
+                        IsChecked="{Binding AllowBetaAndAlpha}"
+                        Style="{DynamicResource MahApps.Metro.Styles.ToggleSwitch.Win10}" />
+                </StackPanel>
+                <StackPanel
+                    Margin="32,0,0,0">
+                    <TextBlock
+                        Text="Runtime"
+                        Style="{StaticResource TitleTextBlockStyle}"
+                        Margin="0,0,0,8" />
+                    <StackPanel
+                        Orientation="Horizontal">
+                        <TextBox
+                            Margin="0,0,0,8"
+                            mahapps:TextBoxHelper.Watermark="Custom Java bin directory, default if empty"
+                            mahapps:TextBoxHelper.UseFloatingWatermark="True"
+                            Text="{Binding JavaBinDirectory}"
+                            Width="300" />
+                        <customControls:IconButton
+                            x:Name="BrowseJavaBinDirectory"
+                            Height="26"
+                            VerticalAlignment="Top"
+                            Icon="FolderOpen"
+                            ToolTip="Browse for directory" />
+                    </StackPanel>
+                    <mahapps:NumericUpDown
+                        Minimum="512"
+                        Maximum="32768"
+                        HasDecimals="False"
+                        HorizontalAlignment="Left"
+                        Width="200"
+                        Value="{Binding Memory}"
+                        mahapps:TextBoxHelper.Watermark="Minecraft memory (MB)"
+                        mahapps:TextBoxHelper.UseFloatingWatermark="True" />
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>
