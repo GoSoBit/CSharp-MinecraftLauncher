@@ -8,6 +8,7 @@ using Launcher.Desktop.Controls;
 using Launcher.Desktop.Models;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Launcher.Desktop.Services
 {
@@ -92,6 +93,23 @@ namespace Launcher.Desktop.Services
             await action();
             Task closeAsync = progress?.CloseAsync();
             if (closeAsync != null) await closeAsync;
+        }
+
+        /// <summary>
+        /// Shows a dialog which allows user to specify a wanted directory.
+        /// </summary>
+        /// <param name="defaultPath">The path to start browsing from</param>
+        /// <returns>The path</returns>
+        public string ShowDirectoryBrowseDialog(string defaultPath)
+        {
+            var dialog = new CommonOpenFileDialog
+            {
+                InitialDirectory = defaultPath,
+                IsFolderPicker = true
+            };
+
+            dialog.ShowDialog();
+            return dialog.FileName;
         }
     }
 }

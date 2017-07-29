@@ -18,5 +18,6 @@ namespace Launcher.Desktop.Contracts
         Task<ProgressDialogController> ShowProgressAsync(string title, string message, bool isCancelable = false);
         Task<IPackDialog> ShowPackManagementDialogAsync(IEnumerable<Pack> packs, Pack packToEdit, string action);
         Task ShowProgressAndDoAsync(Func<Task> action);
+        string ShowDirectoryBrowseDialog(string defaultPath);
     }
 }
