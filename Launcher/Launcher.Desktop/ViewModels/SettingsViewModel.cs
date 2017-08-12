@@ -44,10 +44,7 @@ namespace Launcher.Desktop.ViewModels
         public void BrowseJavaBinDirectory()
         {
             string result = windowManager.ShowDirectoryBrowseDialog(JavaBinDirectory);
-            if (!string.IsNullOrEmpty(result))
-            {
-                JavaBinDirectory = result;
-            }
+            JavaBinDirectory = result;
         }
 
         protected override void OnDeactivate(bool close)

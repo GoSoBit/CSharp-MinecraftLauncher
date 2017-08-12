@@ -108,8 +108,8 @@ namespace Launcher.Desktop.Services
                 IsFolderPicker = true
             };
 
-            dialog.ShowDialog();
-            return dialog.FileName;
+            CommonFileDialogResult result = dialog.ShowDialog();
+            return result == CommonFileDialogResult.Ok ? dialog.FileName : defaultPath;
         }
     }
 }
