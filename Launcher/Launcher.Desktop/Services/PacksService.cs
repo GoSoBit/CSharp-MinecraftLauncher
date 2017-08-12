@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Launcher.Desktop.Contracts;
 using Launcher.Desktop.Models;
+using Launcher.Desktop.Properties;
 using RestSharp;
 using RestSharp.Deserializers;
 
@@ -12,6 +13,7 @@ namespace Launcher.Desktop.Services
     {
         private const string ApiServerUrl = "https://launchermeta.mojang.com/mc/game";
         private readonly IRestClient client;
+        private readonly XmlSerializationService xmlService = new XmlSerializationService();
 
         public PacksService(IRestClient client)
         {
@@ -26,6 +28,19 @@ namespace Launcher.Desktop.Services
             var request = new RestRequest("version_manifest.json") { RootElement = "versions" };
             var result = await client.ExecuteTaskAsync<List<Pack>>(request);
             return result.Data;
+        }
+
+        public IEnumerable<Pack> GetSavedPacks()
+        {
+            string xml = Settings.Default.PacksListXml;
+            IEnumerable<Pack> list =  new List<Pack>();
+
+            if (!string.IsNullOrEmpty(xml))
+            {
+                list = xmlService.Deserialize<List<Pack>>(xml);
+            }
+
+            return list;
         }
     }
 }

@@ -7,5 +7,6 @@ namespace Launcher.Desktop.Contracts
     public interface IPacksService
     {
         Task<IEnumerable<Pack>> GetAvailablePacksAsync();
+        IEnumerable<Pack> GetSavedPacks();
     }
 }

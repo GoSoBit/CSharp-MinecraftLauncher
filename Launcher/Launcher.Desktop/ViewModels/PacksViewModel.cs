@@ -65,12 +65,7 @@ namespace Launcher.Desktop.ViewModels
 
         private void LoadPacks()
         {
-            string xml = Settings.Default.PacksListXml;
-            if (!string.IsNullOrEmpty(xml))
-            {
-                var list = xmlService.Deserialize<List<Pack>>(xml);
-                Packs = list.ToObservable();
-            }
+            Packs = packsService.GetSavedPacks();
         }
 
         private async Task EnsureAllAvailablePackAreLoaded()
