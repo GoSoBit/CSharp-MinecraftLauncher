@@ -73,6 +73,8 @@ namespace Launcher.Desktop.Services
         /// Shows a <see cref="PackManagementDialog" /> dialog inside the current window.
         /// </summary>
         /// <param name="packs">All packs available to choose from.</param>
+        /// <param name="packToEdit">The pack to modify.</param>
+        /// <param name="action">The message to the user. I.e 'edit' will be displayed.</param>
         /// <returns>The dialog</returns>
         public async Task<IPackDialog> ShowPackManagementDialogAsync(IEnumerable<Pack> packs, Pack packToEdit, string action)
         {
