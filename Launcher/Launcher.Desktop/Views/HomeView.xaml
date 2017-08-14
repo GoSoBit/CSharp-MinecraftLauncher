@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:caliburn="http://www.caliburnproject.org"
+    xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="300">
@@ -71,10 +72,30 @@
                     Width="3*" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button
-                x:Name="StartMinecraft"
+            <controls:SplitButton
+                x:Name="MinecraftPacks"
+                caliburn:Message.Attach="[Event Click] = [Action StartMinecraft]"
+                SelectedItem="{Binding SelectedPack}"
                 Grid.Column="1"
-                Style="{StaticResource PlayButtonStyle}" />
+                Foreground="White"
+                DisplayMemberPath="UserFriendlyName"
+                ButtonStyle="{StaticResource PlayButtonStyle}">
+                <controls:SplitButton.Background>
+                    <SolidColorBrush
+                        Color="{DynamicResource TitleBarColor}"
+                        Opacity="0.5" />
+                </controls:SplitButton.Background>
+                <controls:SplitButton.IconTemplate>
+                    <DataTemplate>
+                        <icons:PackIconModern
+                            Kind="ControlPlay" />
+                    </DataTemplate>
+                </controls:SplitButton.IconTemplate>
+                <controls:SplitButton.ArrowBrush>
+                    <SolidColorBrush
+                        Color="White" />
+                </controls:SplitButton.ArrowBrush>
+            </controls:SplitButton>
         </Grid>
     </Grid>
 </UserControl>
