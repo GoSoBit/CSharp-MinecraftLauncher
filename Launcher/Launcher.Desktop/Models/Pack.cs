@@ -19,5 +19,11 @@ namespace Launcher.Desktop.Models
         public string Id { get; set; }
         public string Type { get; set; }
         public string Url { get; set; }
+        public string UserFriendlyName => ToString();
+
+        public override string ToString()
+        {
+            return $"{Type} {Id}";
+        }
     }
 }
