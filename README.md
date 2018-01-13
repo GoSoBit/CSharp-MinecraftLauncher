@@ -2,6 +2,9 @@
 # Minecraft-Launcher
 A modern minecraft launcher
 
+# Development stopped
+Project will be continued during summer
+
 # Screenshots
 Preview, still in development
 
